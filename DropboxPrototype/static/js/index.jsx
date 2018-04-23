@@ -7,6 +7,7 @@ function Welcome(props) {
 }
 
 const element = <Welcome name="world" />;
+
 ReactDOM.render(
 		element,
 		document.getElementById('react')
