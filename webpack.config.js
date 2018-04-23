@@ -5,15 +5,15 @@ var BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
 	context: __dirname,
 	
-	entry: './DropboxPrototype/static/js/index',
+	entry: './accounts/static/js/index',
 	
 	output: {
-		path: path.resolve('./DropboxPrototype/static/bundles'),
+		path: path.resolve('./accounts/static/bundles'),
 		filename: "index.js",
 	},
 	
 	plugins: [
-		new BundleTracker({filename: './DropboxPrototype/webpack-stats.json'}),
+		new BundleTracker({filename: './webpack-stats.json'}),
 	],
 	
 	module: {
