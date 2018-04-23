@@ -5,15 +5,15 @@ var BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
 	context: __dirname,
 	
-	entry: './djangoproject/djangoapp/static/js/index',
+	entry: '/DropboxPrototype/static/js/index',
 	
 	output: {
-		path: path.resolve('./djangoproject/djangoapp/static/bundles/'),
+		path: path.resolve('/DropboxPrototype/static/bundles'),
 		filename: "[name]-[hash].js",
 	},
 	
 	plugins: [
-		new BundleTracker({filename: './djangoproject/webpack-stats.json'}),
+		new BundleTracker({filename: '/DropboxPrototype/webpack-stats.json'}),
 	],
 	
 	module: {
@@ -27,6 +27,4 @@ module.exports = {
 		modules: ['node_modules', 'bower_components'],
 		extensions: ['.js', '.jsx']
 	},
-	
-	
 };
