@@ -3,3 +3,6 @@
 /node_modules/
 /run
 /accounts/static/bundles
+/accounts/migrations/__pycache__/
+/accounts/__pycache__/
+/Dropbox-Prototype/__pycache__/
