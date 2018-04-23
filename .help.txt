@@ -1,0 +1,6 @@
+git clone https://github.com/zjaved101/Dropbox-Prototype.git
+npm install
+pip install -r requirements.txt
+npm run webpack
+python3.6 manage.py runserver 127.0.0.1:8000
+python3.6 -mwebbrowser http://127.0.0.1:8000

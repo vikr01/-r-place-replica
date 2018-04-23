@@ -5,4 +5,5 @@
 /accounts/static/bundles
 /accounts/migrations/__pycache__/
 /accounts/__pycache__/
-/Dropbox-Prototype/__pycache__/
+/DropboxPrototype/__pycache__/
+/webpack-stats.json
