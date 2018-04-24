@@ -10,15 +10,6 @@
 ## Clone
 git clone https://github.com/zjaved101/Dropbox-Prototype.git
 
-## Update npm version
-npm install npm@latest -g
-
-## Check npm version
-npm --version
-
-## Check Node version
-node --version
-
 ## Install Node Dependencies
 npm install
 
