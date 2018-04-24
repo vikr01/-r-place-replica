@@ -1,13 +1,28 @@
 /.DS_Store
+
+# Jetbrains IDEs
 /.idea/
+
+# Node
 /node_modules/
-/run
-/accounts/static/bundles
-/accounts/migrations/__pycache__/
-/accounts/__pycache__/
-/DropboxPrototype/__pycache__/
+
+# Caches
+*/__pycache__/
+
+# Webpack
 /webpack-stats.json
+*/static/bundles
+
+# Log files
 *.log
+
+# Django
 local_settings.py
 db.sqlite3
+
+# Python
 .python-version
+
+# Local bash scripts
+/run
+/install
