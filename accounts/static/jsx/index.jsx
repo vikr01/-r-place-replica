@@ -23,7 +23,7 @@ class Place extends React.Component {
 		]*/
 
 		this.state = {
-
+			
 		}
 	}
 
