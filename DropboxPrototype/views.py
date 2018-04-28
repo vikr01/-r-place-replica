@@ -22,4 +22,11 @@ def generateResult(request):
 	db.set({"item": word})
 	item = db.child("item").get().val()
 	print(item)
+	update()
 	return render(request, "response.html", {"data": item})
+
+def update():
+	#pixel = request.POST.get('pixel')
+	pixel = (0, 0, "blue")
+	row, col, color = pixel
+	db.child("grid").child(row).set({col: color})
