@@ -20,13 +20,13 @@ class Place extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.boxes = [];
-		for(var i = 0; i < size; i++) {
-			boxes.push([]);
-			for(var j = 0; j < size; j++) {
-				boxes[i] = <div></div>;
-			}
-		}
+		// this.boxes = [];
+		// for(var i = 0; i < size; i++) {
+		// 	this.boxes.push([]);
+		// 	for(var j = 0; j < size; j++) {
+		// 		this.boxes[i] = <div></div>;
+		// 	}
+		// }
 
 		/*[
 			[],
