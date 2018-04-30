@@ -25,6 +25,7 @@ def generateResult(request):
 	update()
 	return render(request, "response.html", {"data": item})
 
+
 #an example of how we could update DB with new pixel
 def update():
 	#pixel = request.POST.get('pixel')
@@ -35,3 +36,10 @@ def update():
 
 	#first child will always be grid, then we just find the right row and col
 	db.child("grid").child(row).set({col: color})
+
+def initializeDB(size):
+    	for row in range(0, size):
+    			for col in range(0, size):
+    					db.child("grid").child(row).child(col).set("black")
+
+initializeDB(10)
