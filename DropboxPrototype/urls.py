@@ -19,8 +19,8 @@ from django.urls import include, path
 from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('databasetest/', views.createTextBox),
-    path('databasetest/databaseresult/', views.generateResult),
+    # path('databasetest/', views.createTextBox),
+    # path('databasetest/databaseresult/', views.generateResult),
     path('', include('accounts.urls'))
 ]
 

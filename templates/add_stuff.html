@@ -5,10 +5,11 @@
     <title>Add Stuff</title>
 </head>
 <body>
-<form action = 'databaseresult/' method = 'post'>
+<form action = 'postColorToServer/' method = 'post'>
     {% csrf_token %}
-    Word:
-    <input name = "word">
+    <input name = "x" type="number">
+    <input name = "y" type="number">
+    <input name = "color">
     <input type = "submit">
 </form>
 
