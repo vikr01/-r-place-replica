@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import firebase from 'firebase'
+import _ from 'lodash'
 import "../css/style.css"
 
-const config = {
+const firebase_config = {
     apiKey: "AIzaSyAB0AwVJ9usviOqguYqtzwQ5tt_WVhp4ps",
     authDomain: "r-place-replica.firebaseapp.com",
     databaseURL: "https://r-place-replica.firebaseio.com",
@@ -12,13 +13,34 @@ const config = {
     messagingSenderId: "280715970077"
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(firebase_config);
 
-const size = 5;
+function getDiv(key) {
+	return <div 
+	key={key} 
+	className={"box"} 
+	style={{
+		backgroundColor: "black"
+	}}
+	/>;
+}
 
-class Place extends React.Component {
+const size = 10;
+
+export default class Place extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.boxes = new Array(size);
+		this.allboxes = new Array(size*(size+1));
+		for(let i = 0, k = 0; i < size; i++) {
+			this.boxes[i] = new Array(size);
+			for(let j = 0; j < size; j++, k++) {
+				let key = i.toString()+j.toString();
+				this.allboxes[k] = this.boxes[i][j] = getDiv(key);
+			}
+			this.boxes[i][size-1]=<br key={"linebreak"+i} className={"box"}/>;
+		}
 
 		// this.boxes = [];
 		// for(var i = 0; i < size; i++) {
@@ -54,7 +76,7 @@ class Place extends React.Component {
 
 	render() {
 		return (
-			<h1>Hello World</h1>
+			<div className="boxes_container">{this.boxes}</div>
 		);
 	}
 
