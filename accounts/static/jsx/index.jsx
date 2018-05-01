@@ -4,16 +4,16 @@ import firebase from 'firebase'
 import _ from 'lodash'
 import "../css/style.css"
 
-const firebase_config = {
-    apiKey: "AIzaSyAB0AwVJ9usviOqguYqtzwQ5tt_WVhp4ps",
-    authDomain: "r-place-replica.firebaseapp.com",
-    databaseURL: "https://r-place-replica.firebaseio.com",
-    projectId: "r-place-replica",
-    storageBucket: "r-place-replica.appspot.com",
-    messagingSenderId: "280715970077"
-};
+// const firebase_config = {
+//     apiKey: "AIzaSyAB0AwVJ9usviOqguYqtzwQ5tt_WVhp4ps",
+//     authDomain: "r-place-replica.firebaseapp.com",
+//     databaseURL: "https://r-place-replica.firebaseio.com",
+//     projectId: "r-place-replica",
+//     storageBucket: "r-place-replica.appspot.com",
+//     messagingSenderId: "280715970077"
+// };
 
-firebase.initializeApp(firebase_config);
+// firebase.initializeApp(firebase_config);
 
 function getDiv(key) {
 	return <div 
