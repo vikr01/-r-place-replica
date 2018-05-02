@@ -14,6 +14,7 @@ const FIREBASE_CONFIG = {
 const TABLE = "grid/";
 
 firebase.initializeApp(FIREBASE_CONFIG);
+const database = firebase.database();
 
 // var rootRef = firebase.database()
 // .ref('grid/').once('value').then(function(snapshot) {
@@ -31,21 +32,6 @@ firebase.initializeApp(FIREBASE_CONFIG);
 // 	}
 // );
 
-
-function getDiv(key) {
-	return <div 
-		key={key} 
-		className={"box"} 
-		style={{
-			backgroundColor: "black"
-		}}
-	/>;
-}
-
-function getKey(row, col) {
-	return row.toString()+col.toString();
-}
-
 const size = 10;
 
 export default class Place extends React.Component {
@@ -53,7 +39,6 @@ export default class Place extends React.Component {
 		super(props);
 
 		this.boxes = new Array(size);
-		this.b = new Array(size*size);
 		// this.allboxes = new Array(size*(size+1));
 		
 		// for(let i = 0, k = 0; i < size; i++) {
@@ -66,21 +51,35 @@ export default class Place extends React.Component {
 		// }
 
 
-		for(let i = 0; i < size; i++) {
-			this.boxes[i] = new Array(size+1);
-			for(let j = 0; j < size; j++) {
-				let key = getKey(i, j);
-				this.boxes[i][j]=getDiv(key);
-			}
-			this.boxes[i][size]=<br 
-				key={"linebreak"+i} 
-				className={"box"}
-			/>;
-		}
-
+		this.selectedColor="green";
 
 		this.state = {}
 		
+		database.ref(TABLE).onUpdate(
+			function(snapshot) {
+				console.log(snapshot.val());
+			}
+		);
+	}
+
+	getKey(row, col) {
+		return row.toString()+col.toString();
+	}
+
+	getDiv(key) {
+		return <div 
+			key={key} 
+			className={"box"} 
+			style={{
+				backgroundColor: "black"
+			}}
+			ref={key}
+			onClick={this.handleBoxClick.bind(this, key)}
+		/>;
+	}
+
+	handleBoxClick(key) {
+		this.refs[key].style.backgroundColor=this.selectedColor;
 	}
 
 	// componentWillMount() {
@@ -108,6 +107,27 @@ export default class Place extends React.Component {
 	// getSnapshotBeforeUpdate(prevProps, prevState) {}
 
 	render() {
+		_.each(_.range(size), function(i) {
+			this.boxes[i] = new Array(size+1);
+			_.each(_.range(size), function(j) {
+				let key = this.getKey(i, j);
+				this.boxes[i][j]=this.getDiv(key);
+			}.bind(this));
+			this.boxes[i][size]=<br 
+				key={"linebreak"+i} 
+				className={"box"}
+			/>;
+		}.bind(this));
+
+		database.ref(TABLE).once('value').then(
+			function(snapshot) {
+				_.each(snapshot.val(), function(row, i) {
+					_.each(row, function(col, j) {
+						this.refs[this.getKey(i, j)].style.backgroundColor=col;
+					}.bind(this));
+				}.bind(this));
+			}.bind(this)
+		);
 		
 		return (
 			<div className="boxes_container">
