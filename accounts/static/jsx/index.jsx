@@ -4,6 +4,8 @@ import firebase from 'firebase'
 import _ from 'lodash'
 import "../css/style.css"
 
+/* https://firebase.google.com/docs/database/admin/retrieve-data#section-event-types */
+
 const FIREBASE_CONFIG = {
     'apiKey': "AIzaSyA70V9nqwo5U_mVo4mr8YKprrMyeMaTvuw",
 	'authDomain': "r-place-project.firebaseapp.com",
