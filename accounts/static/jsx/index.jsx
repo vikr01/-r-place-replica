@@ -56,12 +56,6 @@ export default class Place extends React.Component {
 		this.selectedColor="green";
 
 		this.state = {}
-		
-		database.ref(TABLE).onUpdate(
-			function(snapshot) {
-				console.log(snapshot.val());
-			}
-		);
 	}
 
 	getKey(row, col) {
@@ -108,6 +102,25 @@ export default class Place extends React.Component {
 
 	// getSnapshotBeforeUpdate(prevProps, prevState) {}
 
+
+	setListeners() {
+		_.range(size).forEach(
+			function(i) {
+				database.ref(TABLE).child(i).on('child_changed',
+					function(snapshot) {
+						this.refs[
+							this.getKey(
+								i,
+								snapshot.key
+							)
+						].style.backgroundColor = snapshot.val();
+					}.bind(this)
+				)
+			}.bind(this)
+		);
+	}
+
+
 	render() {
 		_.each(_.range(size), function(i) {
 			this.boxes[i] = new Array(size+1);
@@ -130,6 +143,10 @@ export default class Place extends React.Component {
 				}.bind(this));
 			}.bind(this)
 		);
+
+		this.setListeners();
+		
+
 		
 		return (
 			<div className="boxes_container">
