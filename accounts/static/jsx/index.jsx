@@ -14,6 +14,8 @@ const FIREBASE_CONFIG = {
 	'storageBucket': "r-place-project.appspot.com",
 };
 
+const POST_URL = 'inputColor/postColorToServer/';
+
 const TABLE = "grid/";
 
 firebase.initializeApp(FIREBASE_CONFIG);
@@ -64,8 +66,20 @@ export default class Place extends React.Component {
 	}
 
 	handleBoxClick(row, column, key) {
-		this.refs[key].style.backgroundColor=this.selectedColor;
-		
+		const selectedColor = this.selectedColor;
+		this.refs[key].style.backgroundColor=selectedColor;
+
+		$.post(POST_URL, 
+			{
+				x: row,
+				y: column,
+				color: selectedColor
+			},
+
+			function(data) {
+				console.log(data)
+			}.bind(this)
+		);
 	}
 
 	createPanel() {
