@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import _ from 'lodash';
 import $ from 'jquery';
 import "../css/style.css";
+import DjangoCSRFToken from 'django-react-csrftoken';
 
 /* https://firebase.google.com/docs/database/admin/retrieve-data#section-event-types */
 
@@ -14,7 +15,8 @@ const FIREBASE_CONFIG = {
 	'storageBucket': "r-place-project.appspot.com",
 };
 
-const POST_URL = 'inputColor/postColorToServer/';
+//const POST_URL = 'inputColor/postColorToServer/';
+const POST_URL = 'inputColor/'; 
 
 const TABLE = "grid/";
 
