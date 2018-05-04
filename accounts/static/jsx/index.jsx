@@ -50,7 +50,8 @@ export default class Place extends React.Component {
 		return row.toString()+col.toString();
 	}
 
-	getDiv(key) {
+	getDiv(row, column) {
+		const key = this.getKey(row, column);
 		return <div 
 			key={key} 
 			className={"box"} 
@@ -58,20 +59,20 @@ export default class Place extends React.Component {
 				backgroundColor: "black"
 			}}
 			ref={key}
-			onClick={this.handleBoxClick.bind(this, key)}
+			onClick={this.handleBoxClick.bind(this, row, column, key)}
 		/>;
 	}
 
-	handleBoxClick(key) {
+	handleBoxClick(row, column, key) {
 		this.refs[key].style.backgroundColor=this.selectedColor;
+		
 	}
 
 	createPanel() {
 		_.range(size).forEach(function(i) {
 			this.boxes[i] = new Array(size+1);
 			_.range(size).forEach(function(j) {
-				let key = this.getKey(i, j);
-				this.boxes[i][j]=this.getDiv(key);
+				this.boxes[i][j]=this.getDiv(i, j);
 			}.bind(this));
 
 			this.boxes[i][size]=<br 

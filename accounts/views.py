@@ -12,6 +12,13 @@ config  = {
 	'messagingSenderId': "115418004367"
 }
 
+def createResponse(error, message):
+    return {
+        "error": error,
+        "msg": message
+    }
+
+
 #constant
 SIZE = 10
 
@@ -50,18 +57,18 @@ def updatePixelColor(request):
     y = int(request.POST.get("y"))
     color = request.POST.get("color")
 
-    response = {}
-
+    response = None
     if x < SIZE and x > -1:
         if y < SIZE and y > -1:
             if checkColor(color):
                 db.child("grid").child(x).child(y).set(color)
-                response["error"] = False
-                response["msg"] = "DB has been set with new color at location: " + str(x) + ", " + str(y)
+                response = createResponse(
+                    False,
+                    "DB has been set with new color at location: " 
+                    + str(x) + ", " + str(y)
+                )
     else:
-        response["error"] = True
-        response["msg"] = "There was an error with the request"
-
+        response = createResponse(True, "There was an error with the request")
 
     return JsonResponse(response)
 
