@@ -2,3 +2,4 @@ django-webpack-loader
 setuptools
 ez_setup
 pyrebase
+colour
