@@ -19,4 +19,30 @@ br {
 
 .boxes_container {
     font-size: 0;
+    display: block;
+    float: left;
+}
+
+p.choose {
+    font-size: 14px;
+    -webkit-margin-after: 0;
+    -webkit-margin-before: 0;
+}
+
+.palette {
+    border: 3px solid black;
+    background-color: white;
+    padding: 0;
+    text-align: center;
+    display: block;
+    font-size: 0;
+    float: left;
+}
+
+.paletteBox {
+    width: 50px;
+    height: 20px;
+    font-size: 0;
+    padding: 0;
+    display: inline-block;
 }

@@ -40,7 +40,7 @@ def home(request):
     # '<script src=\"../DropboxPrototype/static/bundles/index.js\"></script>',
     # 'Home page! Welcome.'
     # ]))
-    return render(request, 'react.html')
+    return render(request, 'r-place.html')
 
 def checkColor(color):
     try:
