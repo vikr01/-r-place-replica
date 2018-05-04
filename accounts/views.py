@@ -19,8 +19,8 @@ def initializeDB(size):
     #clears DB 
     db.child("grid").remove()
     for row in range(0, size):
-    		for col in range(0, size):
-    				db.child("grid").child(row).child(col).set("black")
+    	for col in range(0, size):
+    		db.child("grid").child(row).child(col).set("black")
     
     return size
 
@@ -69,6 +69,6 @@ firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
 
-size = initializeDB(10)
+# size = initializeDB(10)
 
 #requestObject = post(views.updatePixelColor, {"x" : 0, "y" : 0, "color" : "red"}, {"x" : 0, "y" : 0, "color" : "red"})

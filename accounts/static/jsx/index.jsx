@@ -1,8 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import firebase from 'firebase'
-import _ from 'lodash'
-import "../css/style.css"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import firebase from 'firebase';
+import _ from 'lodash';
+import $ from 'jquery';
+import "../css/style.css";
 
 /* https://firebase.google.com/docs/database/admin/retrieve-data#section-event-types */
 
@@ -72,7 +73,7 @@ export default class Place extends React.Component {
 				let key = this.getKey(i, j);
 				this.boxes[i][j]=this.getDiv(key);
 			}.bind(this));
-			
+
 			this.boxes[i][size]=<br 
 				key={"linebreak"+i} 
 				className={"box"}
