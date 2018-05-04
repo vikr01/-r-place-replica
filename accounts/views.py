@@ -53,6 +53,7 @@ def checkColor(color):
         return False
 
 def updatePixelColor(request):
+    print(request)
     x = int(request.POST.get("x"))
     y = int(request.POST.get("y"))
     color = request.POST.get("color")
