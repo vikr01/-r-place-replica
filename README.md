@@ -3,7 +3,7 @@
     - pip 10.0.1
 
 * node 8.11.1
-    - npm 5.8.0
+    - npm 6.0.0
 
 # Commands listing:
 
