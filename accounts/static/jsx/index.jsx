@@ -18,6 +18,31 @@ const POST_URL = 'inputColor/postColorToServer/';
 
 const TABLE = "grid/";
 
+const COLOR_CHOICES = [
+	"black",
+	"navy",
+	"blue",
+	"lightskyblue",
+	"teal",
+	"steelblue",
+	"green",
+	"yellowgreen",
+	"maroon",
+	"red",
+	"tomato",
+	"whitesmoke",
+	"white",
+	"yellow",
+	"orange",
+	"gray",
+	"purple",
+	"slateblue",
+	"pink",
+	"darksalmon",
+	"tan",
+	"brown",
+];
+
 firebase.initializeApp(FIREBASE_CONFIG);
 const database = firebase.database();
 
@@ -39,26 +64,33 @@ const database = firebase.database();
 
 const size = 10;
 
+database.ref(TABLE).once('value').then(
+	function(snapshot) {
+		render(snapshot.val());
+	}.bind(this)
+);
+
 export default class Place extends React.Component {
 	constructor(props) {
 		super(props);
-
+		
+		this.setColors = props.boxes;
 		this.boxes = new Array(size);
 		this.selectedColor="green";
-		this.state = {}
+		this.state = {};
 	}
 
 	getKey(row, col) {
 		return row.toString()+col.toString();
 	}
 
-	getDiv(row, column) {
+	getDiv(row, column, color="black") {
 		const key = this.getKey(row, column);
 		return <div 
 			key={key} 
 			className={"box"} 
 			style={{
-				backgroundColor: "black"
+				backgroundColor: color
 			}}
 			ref={key}
 			onClick={this.handleBoxClick.bind(this, row, column, key)}
@@ -83,17 +115,19 @@ export default class Place extends React.Component {
 	}
 
 	createPanel() {
-		_.range(size).forEach(function(i) {
+		for(let i = 0; i < size; i++) {
+			const row = this.setColors[i];
 			this.boxes[i] = new Array(size+1);
-			_.range(size).forEach(function(j) {
-				this.boxes[i][j]=this.getDiv(i, j);
-			}.bind(this));
-
+			for(let j = 0; j < size; j++) {
+				const color = this.setColors[i][j];
+				this.boxes[i][j]= this.getDiv(i, j, color);
+			}
 			this.boxes[i][size]=<br 
 				key={"linebreak"+i} 
 				className={"box"}
 			/>;
-		}.bind(this));
+		}
+		this.boxes[size-1][size]=null;
 	}
 
 	initializeFromDB() {
@@ -125,21 +159,58 @@ export default class Place extends React.Component {
 		);
 	}
 
+	createColorPalette() {
+		this.colorPalette = [];
+		COLOR_CHOICES.forEach(
+			function(color) {
+				this.colorPalette.push(
+					<div 
+						className={"paletteBox"}
+						style={{backgroundColor: color}}
+						onClick={
+							function() {
+								this.selectedColor = color;
+							}.bind(this)
+						}
+						key={color+"palette"}
+					/>
+				);
+				this.colorPalette.push(
+					<br
+					key={color+"break"}
+					/>
+				);
+			}.bind(this)
+		);
+	}
 
 	render() {
 		this.createPanel();
 		this.initializeFromDB();
 		this.setListeners();
+		this.createColorPalette();
 		
 		return (
-			<div className="boxes_container">
-				{this.boxes}
+			<div>
+
+				<div className="boxes_container">
+					{this.boxes}
+				</div>
+
+
+				<div className="palette">
+					<p className="choose">Colors</p><br/>
+					{this.colorPalette}
+				</div>
+				
 			</div>
 		);
 	}
 }
 
-ReactDOM.render(
-		<Place/>,
-		document.getElementById('react')
-);
+function render(boxes) {
+	ReactDOM.render(
+			<Place boxes={boxes}/>,
+			document.getElementById('react')
+	);
+}
