@@ -43,27 +43,10 @@ const COLOR_CHOICES = [
 ];
 
 firebase.initializeApp(FIREBASE_CONFIG);
-const database = firebase.database();
-
-// var rootRef = firebase.database()
-// .ref('grid/').once('value').then(function(snapshot) {
-// snapshot.forEach(function(snapshot) {
-// 	console.log(snapshot.val());
-// })
-// });
-
-// firebase.database().ref('/').once('value').then(
-// 	function(snapshot) {
-// 		// snapshot.forEach(function(snapshot) {
-// 		// 	console.log(snapshot.val());
-// 		// });
-// 		// console.log(snapshot.val());
-// 	}
-// );
-
+const DATABASE = firebase.database();
 const size = 100;
 
-database.ref(TABLE).once('value').then((snapshot) => {
+DATABASE.ref(TABLE).once('value').then((snapshot) => {
   render(snapshot.val());
 });
 
@@ -133,7 +116,7 @@ export default class Place extends React.Component {
   }
 
   initializeFromDB() {
-    database.ref(TABLE).once('value').then((snapshot) => {
+    DATABASE.ref(TABLE).once('value').then((snapshot) => {
       _.each(snapshot.val(), (row, i) => {
         _.each(row, (col, j) => {
           this.refs[this.getKey(i, j)].style.backgroundColor = col;
@@ -144,7 +127,7 @@ export default class Place extends React.Component {
 
   setListeners() {
     _.range(size).forEach((i) => {
-      database.ref(TABLE).child(i).on(
+      DATABASE.ref(TABLE).child(i).on(
         'child_changed',
         (snapshot) => {
           this.refs[
