@@ -4,6 +4,6 @@ from django.urls import include, path
 
 urlpatterns = [
     url(r'^$', views.home),
-    path('inputColor/', views.createBaseInputPage),
-    path('inputColor/postColorToServer/', views.updatePixelColor)
+    path('inputColor/', views.updatePixelColor),
+    #path('inputColor/postColorToServer/', views.updatePixelColor),
 ]

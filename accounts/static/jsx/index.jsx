@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import _ from 'lodash';
 import $ from 'jquery';
+import DjangoCSRFToken from 'django-react-csrftoken';
 import '../css/style.css';
-
-/* https://firebase.google.com/docs/database/admin/retrieve-data#section-event-types */
 
 const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyA70V9nqwo5U_mVo4mr8YKprrMyeMaTvuw',
@@ -14,7 +13,8 @@ const FIREBASE_CONFIG = {
   storageBucket: 'r-place-project.appspot.com'
 };
 
-const POST_URL = 'inputColor/postColorToServer/';
+//const POST_URL = 'inputColor/postColorToServer/';
+const POST_URL = 'inputColor/'; 
 
 const TABLE = 'grid/';
 

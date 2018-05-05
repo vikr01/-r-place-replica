@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from colour import Color
 import pyrebase
@@ -35,6 +36,7 @@ def createBaseInputPage(request):
     return render(request, "add_stuff.html")
 
 # Create your views here.
+@csrf_exempt
 def home(request):
     # return HttpResponse("<br/>".join([
     # '<script src=\"../DropboxPrototype/static/bundles/index.js\"></script>',
@@ -52,6 +54,7 @@ def checkColor(color):
     except ValueError: 
         return False
 
+@csrf_exempt
 def updatePixelColor(request):
     print(request)
     x = int(request.POST.get("x"))
