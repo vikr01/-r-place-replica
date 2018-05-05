@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 
-export default {
+module.exports = {
   context: __dirname,
 
   entry: './accounts/static/jsx/index',

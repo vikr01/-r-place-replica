@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import _ from 'lodash';
 import $ from 'jquery';
-import DjangoCSRFToken from 'django-react-csrftoken';
 import '../css/style.css';
 
 const FIREBASE_CONFIG = {
