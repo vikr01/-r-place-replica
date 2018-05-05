@@ -29,7 +29,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./webpack/webpack.config.js --mode development --progress --colors --watch",
     "webpack": "webpack --config ./webpack/webpack.config.js --mode development --json > ./webpack/webpack-compilation-stats.json --progress --colors",
-    "heroku-postbuild": "webpack -p --config /webpack/webpack.config.js --progress --colors"
+    "heroku-postbuild": "webpack -p --config ./webpack/webpack.config.js --progress --colors"
   },
   "repository": {
     "type": "git",
