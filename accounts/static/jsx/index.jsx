@@ -6,10 +6,7 @@ import $ from 'jquery';
 import '../css/style.css';
 
 const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyA70V9nqwo5U_mVo4mr8YKprrMyeMaTvuw',
-  authDomain: 'r-place-project.firebaseapp.com',
   databaseURL: 'https://r-place-project.firebaseio.com',
-  storageBucket: 'r-place-project.appspot.com'
 };
 
 //const POST_URL = 'inputColor/postColorToServer/';
