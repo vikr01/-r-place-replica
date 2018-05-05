@@ -1,3 +1,4 @@
+django
 django-webpack-loader
 setuptools
 ez_setup
