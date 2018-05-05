@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode development --watch",
-    "webpack": "webpack --mode development"
+    "webpack": "webpack --mode development",
+    "postinstall": "webpack --config ./webpack.config.js --mode production --progress --colors"
   },
   "repository": {
     "type": "git",
