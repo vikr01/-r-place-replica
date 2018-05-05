@@ -8,7 +8,7 @@
 # Commands listing:
 
 ## Clone
-git clone https://github.com/zjaved101/Dropbox-Prototype.git
+git clone https://github.com/vikr01/place-replica.git
 
 ## Install Node Dependencies
 npm install
