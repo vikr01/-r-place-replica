@@ -23,13 +23,13 @@
   ],
   "engines": {
     "node": "8.11",
-    "npm": "~6.0.0"
+    "npm": "~6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode development --watch",
-    "webpack": "webpack --mode development",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress --colors"
+    "build": "webpack --mode development --watch --profile --json > compilation-stats.json",
+    "webpack": "webpack --mode development --profile --json > compilation-stats.json",
+    "heroku-postbuild": "webpack -p --progress --colors --profile --json > /webpack/webpack-compilation-stats.json"
   },
   "repository": {
     "type": "git",

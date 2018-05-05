@@ -9,11 +9,11 @@ module.exports = {
 
   output: {
     path: path.resolve('./accounts/static/bundles'),
-    filename: 'index.js'
+    filename: 'index.jsx'
   },
 
   plugins: [
-    new BundleTracker({ filename: './webpack-stats.json' })
+    new BundleTracker({ filename: './webpack/webpack-stats.json' })
   ],
 
   module: {
@@ -30,5 +30,4 @@ module.exports = {
   },
 
 
-  stats: "minimal"
 };
