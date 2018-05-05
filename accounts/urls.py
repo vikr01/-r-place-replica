@@ -5,5 +5,4 @@ from django.urls import include, path
 urlpatterns = [
     url(r'^$', views.home),
     path('inputColor/', views.updatePixelColor),
-    #path('inputColor/postColorToServer/', views.updatePixelColor),
 ]

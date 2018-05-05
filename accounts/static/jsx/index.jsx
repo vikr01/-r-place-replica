@@ -144,16 +144,14 @@ export default class Place extends React.Component {
       this.colorPalette.push(<div
 						className={'paletteBox'}
 						style={{ backgroundColor: color }}
-						onClick={
-							() => {
-								this.selectedColor = color;
-							}
-						}
+						onClick={()=>{
+              this.selectedColor = color;
+            }}
 						key={`${color}palette`}
-					/>);
+      />);
       this.colorPalette.push(<br
 					key={`${color}break`}
-					/>);
+      />);
     });
   }
 
@@ -165,17 +163,13 @@ export default class Place extends React.Component {
 
     return (
 			<div className="main">
-
 				<div className="boxes_container">
 					{this.boxes}
-				</div>
-
-
+				</div>  
 				<div className="palette">
 					<p className="choose">Colors</p><br/>
 					{this.colorPalette}
 				</div>
-
 			</div>
     );
   }
