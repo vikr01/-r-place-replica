@@ -8,7 +8,7 @@ module.exports = {
   entry: '../Place/static/jsx/index',
 
   output: {
-    path: path.resolve('../Place/static/bundles'),
+    path: path.resolve('./Place/static/bundles'),
     filename: 'index.js'
   },
 
