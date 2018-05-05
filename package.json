@@ -27,9 +27,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack-config.js --mode development --watch --profile --json > compilation-stats.json",
-    "webpack": "webpack --config webpack-config.js --mode development --profile --json > compilation-stats.json",
-    "heroku-postbuild": "webpack --config wepack-config.js -p --progress --colors --profile --json > /webpack/webpack-compilation-stats.json"
+    "build": "webpack --config ./webpack/webpack.config.js --mode development --json > ./webpack/webpack-compilation-stats.json --progress --colors --watch",
+    "webpack": "webpack --config ./webpack/webpack.config.js --mode development --json > ./webpack/webpack-compilation-stats.json --progress --colors",
+    "heroku-postbuild": "webpack -p --config ./webpack/webpack.config.js --json > ./webpack/webpack-compilation-stats.json --progress --colors"
   },
   "repository": {
     "type": "git",

@@ -7,11 +7,11 @@
 /node_modules/
 
 # Caches
-*/__pycache__/
+**/__pycache__/
 
 # Webpack
-*/static/bundles
-./webpack/*stats.json
+**/bundles
+webpack/*.json
 
 # Log files
 *.log
