@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from colour import Color
 import pyrebase
+import random
 
 CONFIG  = {
 	'apiKey': 'AIzaSyA70V9nqwo5U_mVo4mr8YKprrMyeMaTvuw',
@@ -19,25 +20,52 @@ FIREBASE = pyrebase.initialize_app(CONFIG)
 
 DB = FIREBASE.database()
 
+COLORS = {
+    'black',
+    'navy',
+    'blue',
+    'lightskyblue',
+    'teal',
+    'steelblue',
+    'green',
+    'yellowgreen',
+    'maroon',
+    'red',
+    'tomato',
+    'whitesmoke',
+    'white',
+    'yellow',
+    'orange',
+    'gray',
+    'purple',
+    'slateblue',
+    'pink',
+    'darksalmon',
+    'tan',
+    'brown'
+}
+
 def createResponse(error, message):
     return {
         'error': error,
         'msg': message
     }
 
-def initializeDB(size):
+def initializeDB():
+    """
+    Run when resetting database values.
+    """
     #clears DB 
-    DB.child('grid').remove()
-    for row in range(0, size):
-    	for col in range(0, size):
-    		DB.child('grid').child(row).child(col).set('black')
-    
-    return size
+    # DB.child('grid').remove() 
+    for row in range(0, DATABASE_SIZE):
+    	for col in range(0, DATABASE_SIZE):
+    		DB.child('grid').child(row).child(col).set(random.choice(tuple(COLORS)))
+    pass
 
 def createBaseInputPage(request):
     return render(request, 'add_stuff.html')
 
-# Create your views here.
+
 @csrf_exempt
 def home(request):
     return render(request, 'r-place.html')
@@ -54,6 +82,15 @@ def checkColor(color):
 
 @csrf_exempt
 def updatePixelColor(request):
+    """
+    request: (request object)
+            {
+                'x' : int <SIZE & >=0, 
+                'y' : int <SIZE & >=0, 
+                'color' : string containing a CSS color style
+            }
+    """
+
     print('REQUEST: ', request)
     if not request.POST or not request.POST:
         print()
@@ -84,8 +121,3 @@ def updatePixelColor(request):
         response = createResponse(True, 'Invalid value selected.')
 
     return JsonResponse(response)
-
-
-# size = initializeDB(10)
-
-#requestObject = post(views.updatePixelColor, {'x' : 0, 'y' : 0, 'color' : 'red'}, {'x' : 0, 'y' : 0, 'color' : 'red'})
