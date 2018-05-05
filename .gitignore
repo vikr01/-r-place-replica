@@ -11,7 +11,7 @@
 
 # Webpack
 **/bundles
-webpack/*.json
+webpack/*stats.json
 
 # Log files
 *.log
