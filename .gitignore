@@ -10,7 +10,6 @@
 */__pycache__/
 
 # Webpack
-/webpack/
 */static/bundles
 
 # Log files
