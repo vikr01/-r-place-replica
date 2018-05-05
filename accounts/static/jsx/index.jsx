@@ -61,7 +61,7 @@ const database = firebase.database();
 // 	}
 // );
 
-const size = 10;
+const size = 100;
 
 database.ref(TABLE).once('value').then((snapshot) => {
   render(snapshot.val());
@@ -73,12 +73,12 @@ export default class Place extends React.Component {
 
     this.setColors = props.boxes;
     this.boxes = new Array(size);
-    this.selectedColor = 'green';
+    this.selectedColor = 'black';
     this.state = {};
   }
 
   getKey(row, col) {
-    return row.toString() + col.toString();
+    return row.toString() +","+ col.toString();
   }
 
   getDiv(row, column, color = 'black') {
@@ -96,8 +96,7 @@ export default class Place extends React.Component {
 
   handleBoxClick(row, column, key) {
     const selectedColor = this.selectedColor;
-    this.refs[key].style.backgroundColor = selectedColor;
-
+    const ref = this.refs[key];
     $.post(
       POST_URL,
       {
@@ -106,9 +105,14 @@ export default class Place extends React.Component {
         color: selectedColor
       },
 
-      (data) => {
-        console.log(data);
-      }
+      function(data) {
+        if(data.error) {
+          console.log(data.msg);
+        }
+        else {
+          ref.style.backgroundColor = selectedColor;
+        }
+      }.bind(this)
     );
   }
 
@@ -180,7 +184,7 @@ export default class Place extends React.Component {
     this.createColorPalette();
 
     return (
-			<div>
+			<div className="main">
 
 				<div className="boxes_container">
 					{this.boxes}
