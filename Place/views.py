@@ -4,7 +4,8 @@ from django.http import JsonResponse
 from colour import Color
 import pyrebase
 import random
-import datetime, dateutil.parser
+import datetime
+import dateutil.parser
 import json
 
 CONFIG  = {
@@ -19,8 +20,7 @@ CONFIG  = {
 DATABASE_SIZE = 100
 
 FIREBASE = pyrebase.initialize_app(CONFIG).database()
-
-ALLOWED_CHANGES_PER_30_SEC = 5
+TIME_WAIT = 2
 
 COLORS = {
     'black',
@@ -48,10 +48,10 @@ COLORS = {
 }
 
 def createResponse(error, message):
-    return {
+    return JsonResponse({
         'error': error,
-        'msg': message
-    }
+        'msg': message,
+    })
 
 def initializeDB():
     """
@@ -70,8 +70,8 @@ def createBaseInputPage(request):
 
 @csrf_exempt
 def home(request):
-    request.session['changed'] = 0
-    request.session['wait_till'] = (datetime.datetime.now() + datetime.timedelta(0, -1)).isoformat()
+    request.session['wait'] = False
+    request.session['wait_till'] = datetime.datetime.now().isoformat()
     return render(request, 'r-place.html')
 
 def checkColor(color):
@@ -95,16 +95,15 @@ def updatePixelColor(request):
             }
     """
 
-    print('REQUEST: ', str(request))
+    print('REQUEST: ', str(request.POST))
 
-    if request.session['changed'] == 5:
-        if datetime.datetime.now() < dateutil.parser.parse(request.session['waittill']):
-            return JsonResponse({
-                    False,
-                    None
-            })
-        else:
-            request.session['changed'] = 0
+    if request.session['wait'] or datetime.datetime.now() < dateutil.parser.parse(request.session['waittill']):
+        return createResponse(
+            True,
+            "WAIT"
+        )
+    
+    request.session['wait'] = True
 
     try:
         x = int(request.POST.get('x'))
@@ -112,10 +111,11 @@ def updatePixelColor(request):
         color = request.POST.get('color')
     except (ValueError, KeyError) as e:
         print(str(e))
-        return JsonResponse(createResponse(
-                True,
-                'Invalid value selected.'
-        ))
+        request.session['wait'] = False
+        return createResponse(
+            True,
+            'Invalid value selected.'
+        )
 
     response = None
     if x < DATABASE_SIZE and x >= 0 \
@@ -123,16 +123,14 @@ def updatePixelColor(request):
                             and checkColor(color):
         
         FIREBASE.child('grid').child(x).child(y).set(color)
-        request.session['changed'] += 1
+        request.session['waittill'] = (datetime.datetime.now() + datetime.timedelta(0, TIME_WAIT)).isoformat()
         response = createResponse(
             False,
-            {'wait': True} if request.session['changed'] == 5
-             else {}
+            "WAIT"
         )
-
-        if request.session['changed'] == 5:
-            request.session['waittill'] = (datetime.datetime.now() + datetime.timedelta(0, 30)).isoformat()
+    
     else:
         response = createResponse(True, 'Invalid value selected.')
 
-    return JsonResponse(response)
+    request.session['wait'] = False
+    return response

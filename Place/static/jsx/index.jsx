@@ -86,12 +86,7 @@ export default class Place extends React.Component {
       },
 
       function(data) {
-        if(data.error) {
-          console.log(data.msg);
-        }
-        else {
-          ref.style.backgroundColor = selectedColor;
-        }
+        console.log(data)
       }.bind(this)
     );
   }
