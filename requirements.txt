@@ -3,6 +3,7 @@ ez_setup
 pip==10.0.1
 django==2.0.4
 django-webpack-loader
+python-dateutil==2.7.2
 gunicorn==19.8.1
 pyrebase
 colour
