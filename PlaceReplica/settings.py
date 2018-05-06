@@ -127,3 +127,5 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack/webpack-stats.json'),
     }
 }
+
+SECURE_SSL_REDIRECT = True
