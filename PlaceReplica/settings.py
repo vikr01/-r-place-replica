@@ -80,8 +80,13 @@ WSGI_APPLICATION = 'PlaceReplica.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django',               
+        'USER': 'rgjznhmadgfgmu',
+        'PASSWORD': 'b365c93c5dcabd11b8ca72274a65eb08753d846dcc046bafcf9585782f7bc2bd',
+        'HOST': 'ec2-23-23-142-5.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'URI': 'postgres://rgjznhmadgfgmu:b365c93c5dcabd11b8ca72274a65eb08753d846dcc046bafcf9585782f7bc2bd@ec2-23-23-142-5.compute-1.amazonaws.com:5432/d6gjhuk57u3ont'
     }
 }
 
