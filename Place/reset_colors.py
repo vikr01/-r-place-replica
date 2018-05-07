@@ -28,7 +28,6 @@ COLORS = {
 DATABASE_SIZE = 100
 
 
-
 CONFIG  = {
 	'apiKey': 'AIzaSyA70V9nqwo5U_mVo4mr8YKprrMyeMaTvuw',
 	'authDomain': 'r-place-project.firebaseapp.com',
@@ -38,7 +37,6 @@ CONFIG  = {
 	'messagingSenderId': '115418004367'
 }
 FIREBASE = pyrebase.initialize_app(CONFIG).database()
-
 
 
 def initializeDB():
@@ -52,3 +50,5 @@ def initializeDB():
     		FIREBASE.child('grid').child(row).child(col).set(random.choice(tuple(COLORS)))
     pass
 
+if __name__ == '__main__':
+    initializeDB()
