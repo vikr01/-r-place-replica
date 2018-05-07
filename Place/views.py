@@ -53,17 +53,6 @@ def createResponse(error, message):
         'msg': message,
     })
 
-def initializeDB():
-    """
-    Run when resetting database values.
-    """
-    #clears FIREBASE 
-    # FIREBASE.child('grid').remove() 
-    for row in range(0, DATABASE_SIZE):
-    	for col in range(0, DATABASE_SIZE):
-    		FIREBASE.child('grid').child(row).child(col).set(random.choice(tuple(COLORS)))
-    pass
-
 def createBaseInputPage(request):
     return render(request, 'add_stuff.html')
 
