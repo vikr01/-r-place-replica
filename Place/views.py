@@ -20,7 +20,7 @@ CONFIG  = {
 DATABASE_SIZE = 100
 
 FIREBASE = pyrebase.initialize_app(CONFIG).database()
-TIME_WAIT = 2
+TIME_WAIT = 1
 
 COLORS = {
     'black',
@@ -60,7 +60,7 @@ def createBaseInputPage(request):
 @csrf_exempt
 def home(request):
     request.session['wait'] = False
-    # request.session['waittill'] = datetime.datetime.now().isoformat()
+    request.session['waittill'] = datetime.datetime.now().isoformat()
     return render(request, 'r-place.html')
 
 def checkColor(color):
@@ -86,12 +86,17 @@ def updatePixelColor(request):
 
     print('REQUEST: ', str(request.POST))
 
-    if request.session['wait']:
-    # or datetime.datetime.now() < dateutil.parser.parse(request.session['waittill']):
+    if request.session['wait'] or datetime.datetime.now() < dateutil.parser.parse(request.session['waittill']):
         return createResponse(
             True,
             "WAIT"
         )
+
+    # if request.session['reject'] is True:
+    #     return createResponse(
+    #         True,
+    #         None
+    #     )
     
     request.session['wait'] = True
 
@@ -113,7 +118,7 @@ def updatePixelColor(request):
                             and checkColor(color):
         
         FIREBASE.child('grid').child(x).child(y).set(color)
-        # request.session['waittill'] = (datetime.datetime.now() + datetime.timedelta(0, TIME_WAIT)).isoformat()
+        request.session['waittill'] = (datetime.datetime.now() + datetime.timedelta(0, TIME_WAIT)).isoformat()
         response = createResponse(
             False,
             "WAIT"
