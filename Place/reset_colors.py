@@ -2,6 +2,9 @@ import pyrebase
 import random
 import json
 import os, os.path
+import sys
+from PIL import Image
+import numpy
 
 COLORS = {
     'black',
@@ -29,11 +32,12 @@ COLORS = {
 }
 DATABASE_SIZE = 100
 
+
 FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 CONFIG = json.loads(
     open(
-        os.path.join(FILE_DIR, './_sensitive/colors_firebase.json'),
+        os.path.join(FILE_DIR, '_sensitive/colors_firebase.json'),
         'r'
     ).read()
 )
@@ -52,5 +56,29 @@ def initializeDB():
     		FIREBASE.child('grid').child(row).child(col).set(random.choice(tuple(COLORS)))
     pass
 
+def getPixels(filename, startRow=0, startColumn=0):
+    image = Image.open(os.path.join(FILE_DIR, 'static/images/'+filename))
+    arr = numpy.array(image)
+    
+    i=startRow
+    for row in arr:
+        if i >= DATABASE_SIZE:
+            break
+        j=startColumn
+        for pixel in row:
+            if j >= DATABASE_SIZE:
+                break
+            send = 'rgb'+str(tuple(arr[i][j]))
+            FIREBASE.child('grid').child(i).child(j).set(send)
+            j += 1
+        i += 1
+
+
+
+    pass
+
 if __name__ == '__main__':
-    initializeDB()
+    if sys.argv[1] == 'random' or len(sys.argv) < 2:
+        initializeDB()
+    else:
+        getPixels(sys.argv[1])

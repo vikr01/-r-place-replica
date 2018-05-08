@@ -5,38 +5,42 @@ import _ from 'lodash';
 import $ from 'jquery';
 import '../css/style.css';
 
-firebase.initializeApp({
-  databaseURL: 'https://r-place-project.firebaseio.com'
-});
+const FIREBASE_CONFIG = {
+  databaseURL: 'https://r-place-project.firebaseio.com',
+};
 
-const POST_URL = 'inputColor/',
-  TABLE = 'grid/',
-  COLOR_CHOICES = [
-    'black',
-    'navy',
-    'blue',
-    'lightskyblue',
-    'teal',
-    'steelblue',
-    'green',
-    'yellowgreen',
-    'maroon',
-    'red',
-    'tomato',
-    'whitesmoke',
-    'white',
-    'yellow',
-    'orange',
-    'gray',
-    'purple',
-    'slateblue',
-    'pink',
-    'darksalmon',
-    'tan',
-    'brown'
-  ],
-  SIZE = 100,
-  DATABASE = firebase.database();
+const POST_URL = 'inputColor/'; 
+
+const TABLE = 'grid/';
+
+const COLOR_CHOICES = [
+  'black',
+  'navy',
+  'blue',
+  'lightskyblue',
+  'teal',
+  'steelblue',
+  'green',
+  'yellowgreen',
+  'maroon',
+  'red',
+  'tomato',
+  'whitesmoke',
+  'white',
+  'yellow',
+  'orange',
+  'gray',
+  'purple',
+  'slateblue',
+  'pink',
+  'darksalmon',
+  'tan',
+  'brown'
+];
+
+firebase.initializeApp(FIREBASE_CONFIG);
+const DATABASE = firebase.database();
+const size = 100;
 
 DATABASE.ref(TABLE).once('value').then((snapshot) => {
   render(snapshot.val());
@@ -47,7 +51,7 @@ export default class Place extends React.Component {
     super(props);
 
     this.setColors = props.boxes;
-    this.boxes = new Array(SIZE);
+    this.boxes = new Array(size);
     this.selectedColor = 'black';
     this.state = {};
   }
@@ -87,19 +91,19 @@ export default class Place extends React.Component {
   }
 
   createPanel() {
-    for (let i = 0; i < SIZE; i++) {
+    for (let i = 0; i < size; i++) {
       const row = this.setColors[i];
-      this.boxes[i] = new Array(SIZE + 1);
-      for (let j = 0; j < SIZE; j++) {
+      this.boxes[i] = new Array(size + 1);
+      for (let j = 0; j < size; j++) {
         const color = this.setColors[i][j];
         this.boxes[i][j] = this.getDiv(i, j, color);
       }
-      this.boxes[i][SIZE] = <br
+      this.boxes[i][size] = <br
 				key={`linebreak${i}`}
 				className={'box'}
 			/>;
     }
-    this.boxes[SIZE - 1][SIZE] = null;
+    this.boxes[size - 1][size] = null;
   }
 
   initializeFromDB() {
@@ -113,7 +117,7 @@ export default class Place extends React.Component {
   }
 
   setListeners() {
-    _.range(SIZE).forEach((i) => {
+    _.range(size).forEach((i) => {
       DATABASE.ref(TABLE).child(i).on(
         'child_changed',
         (snapshot) => {

@@ -9,3 +9,5 @@ python-dateutil==2.7.2
 gunicorn==19.8.1
 pyrebase
 colour
+Pillow==5.1.0
+numpy==1.14.3
