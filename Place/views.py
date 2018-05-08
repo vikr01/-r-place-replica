@@ -7,10 +7,16 @@ import random
 import datetime
 import dateutil.parser
 import json
+import os, os.path
 
-with open('./_sensitive/colors_firebase.json', 'r') as config:
-    global CONFIG
-    CONFIG = json.loads(config.read())
+FILE_DIR = os.path.dirname(os.path.realpath(__file__))
+
+CONFIG = json.loads(
+    open(
+        os.path.join(FILE_DIR, './_sensitive/colors_firebase.json'),
+        'r'
+    ).read()
+)
 
 DATABASE_SIZE = 100
 

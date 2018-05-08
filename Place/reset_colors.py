@@ -1,6 +1,7 @@
 import pyrebase
 import random
 import json
+import os, os.path
 
 COLORS = {
     'black',
@@ -28,9 +29,14 @@ COLORS = {
 }
 DATABASE_SIZE = 100
 
-with open('./_sensitive/colors_firebase.json', 'r') as config:
-    global CONFIG
-    CONFIG = json.loads(config.read())
+FILE_DIR = os.path.dirname(os.path.realpath(__file__))
+
+CONFIG = json.loads(
+    open(
+        os.path.join(FILE_DIR, './_sensitive/colors_firebase.json'),
+        'r'
+    ).read()
+)
 
 FIREBASE = pyrebase.initialize_app(CONFIG).database()
 

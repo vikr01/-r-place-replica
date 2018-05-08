@@ -15,13 +15,17 @@ import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 # Qui
 # ck-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = open('./_sensitive/secret_key', 'r').read()
+SECRET_KEY = open(
+    os.path.join(FILE_DIR, './_sensitive/secret_key'),
+    'r'
+).read()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,7 +86,12 @@ WSGI_APPLICATION = 'PlaceReplica.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': json.loads(open('./_sensitive/default_postgres.json', 'r').read())
+    'default': json.loads(
+        open(
+            os.path.join(FILE_DIR, './_sensitive/default_postgres.json'),
+            'r'
+        ).read()
+    )
 }
 
 # Password validation
