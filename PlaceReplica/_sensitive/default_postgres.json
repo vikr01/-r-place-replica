@@ -1,0 +1,8 @@
+{
+    "ENGINE": "django.db.backends.postgresql_psycopg2",
+    "HOST": "ec2-54-204-39-46.compute-1.amazonaws.com",
+    "NAME": "d9g7or0kluclpf",
+    "USER": "fuvximdufhsatb",
+    "PORT": "5432",
+    "PASSWORD": "a47e5213b8b0e29ca1da8931302f4fa206cf1ed391b506d1cd95448baf33d123"
+}
