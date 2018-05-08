@@ -1,5 +1,6 @@
 import pyrebase
 import random
+import json
 
 COLORS = {
     'black',
@@ -27,15 +28,10 @@ COLORS = {
 }
 DATABASE_SIZE = 100
 
+with open('./_sensitive/colors_firebase.json', 'r') as config:
+    global CONFIG
+    CONFIG = json.loads(config.read())
 
-CONFIG  = {
-	'apiKey': 'AIzaSyA70V9nqwo5U_mVo4mr8YKprrMyeMaTvuw',
-	'authDomain': 'r-place-project.firebaseapp.com',
-	'databaseURL': 'https://r-place-project.firebaseio.com',
-	'projectId': 'r-place-project',
-	'storageBucket': 'r-place-project.appspot.com',
-	'messagingSenderId': '115418004367'
-}
 FIREBASE = pyrebase.initialize_app(CONFIG).database()
 
 

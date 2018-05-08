@@ -8,14 +8,9 @@ import datetime
 import dateutil.parser
 import json
 
-CONFIG  = {
-	'apiKey': 'AIzaSyA70V9nqwo5U_mVo4mr8YKprrMyeMaTvuw',
-	'authDomain': 'r-place-project.firebaseapp.com',
-	'databaseURL': 'https://r-place-project.firebaseio.com',
-	'projectId': 'r-place-project',
-	'storageBucket': 'r-place-project.appspot.com',
-	'messagingSenderId': '115418004367'
-}
+with open('./_sensitive/colors_firebase.json', 'r') as config:
+    global CONFIG
+    CONFIG = json.loads(config.read())
 
 DATABASE_SIZE = 100
 

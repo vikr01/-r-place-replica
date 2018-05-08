@@ -26,3 +26,6 @@ db.sqlite3
 # Local bash scripts
 /run
 /install
+
+# Information sensitive files
+**/_sensitive*

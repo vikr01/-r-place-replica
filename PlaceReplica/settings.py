@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ly9_@c8!b-b)6l$ki1zq$5r@q=xws%uqa=2#gm^qwv9r@&&op9'
+SECRET_KEY = open('./_sensitive/secret_key', 'r').read()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,15 +82,7 @@ WSGI_APPLICATION = 'PlaceReplica.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd6gjhuk57u3ont',
-        'USER': 'rgjznhmadgfgmu',
-        'PASSWORD': 'b365c93c5dcabd11b8ca72274a65eb08753d846dcc046bafcf9585782f7bc2bd',
-        'HOST': 'ec2-23-23-142-5.compute-1.amazonaws.com',
-        'PORT': '5432',
-        'URI': 'postgres://rgjznhmadgfgmu:b365c93c5dcabd11b8ca72274a65eb08753d846dcc046bafcf9585782f7bc2bd@ec2-23-23-142-5.compute-1.amazonaws.com:5432/d6gjhuk57u3ont',
-    }
+    'default': json.loads(open('./_sensitive/default_postgres.json', 'r').read())
 }
 
 # Password validation
