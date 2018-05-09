@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
-require('babel-polyfill');
 
 module.exports = {
   context: __dirname,
