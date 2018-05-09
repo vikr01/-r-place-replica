@@ -6,7 +6,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    index: ['babel-regenerator-runtime', '../Place/static/jsx/index']
+    index: ['babel-polyfill', '../Place/static/jsx/index']
   },
 
   output: {
