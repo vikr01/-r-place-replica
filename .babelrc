@@ -1,4 +1,4 @@
 {
   "presets": ["babel-preset-env", "react"],
-  "plugins": ["transform-async-to-generator"]
+  "plugins": ["transform-regenerator"]
 }

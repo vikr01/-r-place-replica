@@ -1,12 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
+require('babel-polyfill');
 
 module.exports = {
   context: __dirname,
 
   entry: {
-    index: ['babel-polyfill', '../Place/static/jsx/index']
+    index: [
+      'babel-polyfill', 
+      '../Place/static/jsx/index'
+    ]
   },
 
   output: {
