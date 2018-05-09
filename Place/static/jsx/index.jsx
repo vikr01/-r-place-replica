@@ -73,6 +73,10 @@ export default class Place extends React.Component {
 		/>;
   }
 
+  sleep(t) {
+    return new Promise(resolve => setTimeout(resolve, t*1000));
+  }
+
   handleBoxClick(row, column, key) {
     const selectedColor = this.selectedColor;
     const ref = this.refs[key];
@@ -84,8 +88,10 @@ export default class Place extends React.Component {
         color: selectedColor
       },
 
-      function(data) {
-        console.log(data)
+      async function(data) {
+        if(!data.error) {
+          await this.sleep(data.msg);
+        }
       }.bind(this)
     );
   }
