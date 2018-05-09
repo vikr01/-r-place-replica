@@ -68,7 +68,7 @@ def getPixels(filename, startRow=0, startColumn=0):
         for pixel in row:
             if j >= DATABASE_SIZE:
                 break
-            send = 'rgb'+str(tuple(arr[i][j]))
+            send = 'rgb'+str(tuple(pixel))
             FIREBASE.child('grid').child(i).child(j).set(send)
             j += 1
         i += 1

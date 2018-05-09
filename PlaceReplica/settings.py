@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
 import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,18 +23,12 @@ FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = open(
-    os.path.join(FILE_DIR, './_sensitive/secret_key'),
-    'r'
-).read()
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'r-place.herokuapp.com',
-    'localhost'
-]
+ALLOWED_HOSTS = json.loads(os.environ['LOCALHOSTS'])
 
 # Application definition
 
@@ -86,12 +81,7 @@ WSGI_APPLICATION = 'PlaceReplica.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': json.loads(
-        open(
-            os.path.join(FILE_DIR, './_sensitive/default_postgres.json'),
-            'r'
-        ).read()
-    )
+    'default': dj_database_url.config(default=os.environ['DATABASE_URL']),
 }
 
 # Password validation
