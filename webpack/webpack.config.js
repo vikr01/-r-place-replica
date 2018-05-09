@@ -6,9 +6,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    index: [
-      '../Place/static/jsx/index'
-    ]
+    index: '../Place/static/jsx/index'
   },
 
   output: {
