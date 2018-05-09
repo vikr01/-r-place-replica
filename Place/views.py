@@ -11,12 +11,7 @@ import os, os.path
 
 FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 
-CONFIG = json.loads(
-    open(
-        os.path.join(FILE_DIR, './_sensitive/colors_firebase.json'),
-        'r'
-    ).read()
-)
+CONFIG = json.loads(os.environ['COLORS_FIREBASE'])
 
 DATABASE_SIZE = 100
 
