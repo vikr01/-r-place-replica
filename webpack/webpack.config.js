@@ -8,7 +8,6 @@ module.exports = {
 
   entry: {
     index: [
-      'babel-polyfill', 
       '../Place/static/jsx/index'
     ]
   },
