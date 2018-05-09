@@ -27,8 +27,5 @@ db.sqlite3
 /run
 /install
 
-# Image files
-**/static/images/*
-
 # Sensitive info
 **/_sensitive*
