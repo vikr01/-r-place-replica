@@ -1,4 +1,7 @@
 # Versions
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/vikr01/-r-place-replica.svg)](https://greenkeeper.io/)
+
 * python 3.6.3
     - pip 10.0.1
 
